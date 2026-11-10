@@ -44,14 +44,6 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(51, 65, 85, 0.9);
         }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
-        ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.5); border-radius: 9999px; }
-        @media print {
-            .no-print { display: none !important; }
-            body { background: white !important; color: black !important; }
-            .glass-card { background: none !important; border: 1px solid #ccc !important; box-shadow: none !important; }
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
@@ -64,217 +56,201 @@
                     <i class="fa-solid fa-camera-retro text-lg"></i>
                 </div>
                 <div>
-                    <div class="flex items-center gap-2">
-                        <h1 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
-                            Thai ➔ Burmese Travel Assistant
-                        </h1>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                            🇹🇭 ➔ 🇲🇲
-                        </span>
-                    </div>
+                    <h1 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">
+                        Thai ➔ Burmese Travel Assistant
+                    </h1>
                     <p class="text-xs text-slate-500 dark:text-slate-400 myanmar-text">
                         ထိုင်း-မြန်မာ ခရီးသွား ဓာတ်ပုံ နှင့် ခရီးစဉ် ဘာသာပြန်စနစ်
                     </p>
                 </div>
             </div>
 
-            <!-- Header Actions -->
             <div class="flex items-center space-x-2">
-                <button onclick="manageApiKey()" class="px-3 py-1.5 text-xs sm:text-sm font-medium text-amber-800 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/80 dark:text-amber-300 rounded-lg border border-amber-200 dark:border-amber-800 transition flex items-center gap-1.5">
+                <button onclick="manageApiKey()" class="px-3 py-1.5 text-xs font-medium text-amber-800 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/80 dark:text-amber-300 rounded-lg border border-amber-200 dark:border-amber-800 transition flex items-center gap-1.5">
                     <i class="fa-solid fa-key text-amber-500"></i>
                     <span id="keyStatusText">Set API Key</span>
                 </button>
-                <button onclick="toggleTheme()" class="p-2 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition">
+                <button onclick="toggleTheme()" class="p-2 text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded-lg">
                     <i class="fa-solid fa-moon dark:hidden"></i>
                     <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-100 dark:border-slate-800/60">
-            <nav class="flex space-x-1 sm:space-x-4 overflow-x-auto py-2 text-xs sm:text-sm font-medium">
-                <button onclick="switchTab('translator')" id="tab-translator" class="tab-btn active px-3.5 py-2 rounded-lg flex items-center gap-2 transition bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 font-semibold">
-                    <i class="fa-solid fa-map-location-dot"></i> 🗺️ Itinerary Translator (ခရီးစဉ်)
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-100 dark:border-slate-800">
+            <nav class="flex space-x-2 overflow-x-auto py-2 text-xs sm:text-sm font-medium">
+                <button onclick="switchTab('translator')" id="tab-translator" class="tab-btn active px-3.5 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 font-semibold">
+                    🗺️ Itinerary Translator
                 </button>
-                <button onclick="switchTab('photo')" id="tab-photo" class="tab-btn px-3.5 py-2 rounded-lg flex items-center gap-2 transition text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i class="fa-solid fa-camera"></i> 📸 Photo Translate (ဓာတ်ပုံ)
+                <button onclick="switchTab('photo')" id="tab-photo" class="tab-btn px-3.5 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    📸 Photo Translate
                 </button>
-                <button onclick="switchTab('phrasebook')" id="tab-phrasebook" class="tab-btn px-3.5 py-2 rounded-lg flex items-center gap-2 transition text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i class="fa-solid fa-book-bookmark"></i> 🗣️ Thai Phrasebook (စကားပြော)
+                <button onclick="switchTab('phrasebook')" id="tab-phrasebook" class="tab-btn px-3.5 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    🗣️ Thai Phrasebook
                 </button>
-                <button onclick="switchTab('converter')" id="tab-converter" class="tab-btn px-3.5 py-2 rounded-lg flex items-center gap-2 transition text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i class="fa-solid fa-calculator"></i> 💵 THB / MMK Converter (ငွေလဲ)
+                <button onclick="switchTab('converter')" id="tab-converter" class="tab-btn px-3.5 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    💵 THB / MMK Converter
                 </button>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content Container -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
-        <!-- TAB 1: ITINERARY TRANSLATOR -->
+        <!-- ITINERARY TRANSLATOR -->
         <section id="view-translator" class="space-y-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                
-                <!-- Input Box -->
-                <div class="glass-card rounded-2xl p-5 shadow-sm space-y-4">
+                <div class="glass-card rounded-2xl p-5 space-y-4">
                     <div class="flex items-center justify-between">
-                        <label for="thaiInput" class="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-md bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 flex items-center justify-center text-xs font-bold">TH</span>
-                            Thai Itinerary Text (ภาษาไทย)
+                        <label for="thaiInput" class="font-semibold text-slate-800 dark:text-slate-200">
+                            Thai Text (ภาษาไทย)
                         </label>
-                        <div class="flex items-center gap-2">
-                            <button onclick="clearInput()" class="text-xs text-slate-500 hover:text-red-500 transition px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
-                                <i class="fa-regular fa-trash-can"></i> Clear
-                            </button>
-                            <button onclick="pasteFromClipboard()" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline px-2 py-1">
-                                <i class="fa-regular fa-paste"></i> Paste
-                            </button>
-                        </div>
+                        <button onclick="document.getElementById('thaiInput').value=''" class="text-xs text-slate-500 hover:text-red-500">Clear</button>
                     </div>
 
-                    <textarea id="thaiInput" rows="14" class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-emerald-500 outline-none thai-text transition resize-y" placeholder="วางข้อความแผนการเดินทาง သို့မဟုတ် ထိုင်းစာများကို ဒီနေရာတွင် ရိုက်ထည့်ပါ..."></textarea>
+                    <textarea id="thaiInput" rows="14" class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-sm thai-text outline-none focus:ring-2 focus:ring-emerald-500" placeholder="วางข้อความภาษาไทยของคุณที่นี่..."></textarea>
 
-                    <div class="flex items-center justify-between pt-2">
-                        <span id="charCounter" class="text-xs text-slate-400">0 characters</span>
-                        <button id="translateBtn" onclick="runTranslation()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-sm shadow-md shadow-emerald-600/30 flex items-center gap-2 transition">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>Translate to Burmese</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Output Container -->
-                <div class="glass-card rounded-2xl p-5 shadow-sm space-y-4">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 dark:border-slate-700 pb-3">
-                        <label class="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                            <span class="w-6 h-6 rounded-md bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs font-bold">MM</span>
-                            Burmese Result (မြန်မာဘာသာပြန်)
-                        </label>
-                        <button onclick="copyBurmeseText()" class="p-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 bg-slate-100 dark:bg-slate-800 rounded-lg transition text-xs flex items-center gap-1 font-medium">
-                            <i class="fa-regular fa-copy"></i> Copy Text
-                        </button>
-                    </div>
-
-                    <div id="loadingState" class="hidden py-12 text-center space-y-3">
-                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-emerald-500 border-t-transparent"></div>
-                        <p class="text-sm text-slate-500 myanmar-text">မြန်မာဘာသာသို့ ပြန်ဆိုနေပါသည်...</p>
-                    </div>
-
-                    <div id="outputContainer" class="min-h-[300px] p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl myanmar-text text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-100 whitespace-pre-wrap">
-                        စာသားများကို ဘာသာပြန်ရန် Translate to Burmese ခလုတ်ကို နှိပ်ပါ...
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- TAB 2: PHOTO TRANSLATE -->
-        <section id="view-photo" class="hidden space-y-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-                
-                <div class="glass-card rounded-2xl p-5 shadow-sm space-y-4">
-                    <label class="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                        <i class="fa-solid fa-image text-emerald-500"></i> Select or Upload Photo (ဓာတ်ပုံရွေးရန်)
-                    </label>
-
-                    <input type="file" id="photoInput" accept="image/*" capture="environment" class="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 dark:file:bg-emerald-950 dark:file:text-emerald-300 cursor-pointer" onchange="handleFileSelect(event)">
-
-                    <div id="previewBox" class="min-h-[220px] rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center p-3 bg-slate-50/50 dark:bg-slate-900/40">
-                        <img id="photoPreview" class="max-h-[280px] rounded-lg hidden object-contain" alt="Preview">
-                        <span id="previewPlaceholder" class="text-xs text-slate-400 myanmar-text text-center">
-                            ဓာတ်ပုံရိုက်ရန် သို့မဟုတ် ပုံရွေးချယ်ပါ (JPG, PNG)
-                        </span>
-                    </div>
-
-                    <button onclick="processPhotoTranslation()" class="w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 active:scale-95 shadow-md shadow-emerald-600/20 transition">
-                        Translate Photo to Burmese (ဓာတ်ပုံ ဘာသာပြန်မည်)
+                    <button id="translateBtn" onclick="runTranslation()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition">
+                        Translate to Burmese (မြန်မာဘာသာသို့ ပြန်မည်)
                     </button>
                 </div>
 
-                <div class="glass-card rounded-2xl p-5 shadow-sm space-y-4">
-                    <label class="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                        <i class="fa-solid fa-language text-amber-500"></i> Photo Translation Result
-                    </label>
-
-                    <div id="photoLoading" class="hidden py-12 text-center space-y-3">
-                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-emerald-500 border-t-transparent"></div>
-                        <p class="text-sm text-slate-500 myanmar-text">ဓာတ်ပုံပါ စာလုံးများကို ဖတ်ရှု၍ ဘာသာပြန်နေပါသည်...</p>
+                <div class="glass-card rounded-2xl p-5 space-y-4">
+                    <label class="font-semibold text-slate-800 dark:text-slate-200">Burmese Result (မြန်မာဘာသာပြန် ရလဒ်)</label>
+                    <div id="loadingState" class="hidden py-8 text-center text-slate-500 myanmar-text">
+                        <i class="fa-solid fa-spinner animate-spin text-emerald-500 text-2xl mb-2"></i>
+                        <p>AI မှ မြန်မာဘာသာသို့ ပြန်ဆိုနေပါသည်...</p>
                     </div>
-
-                    <div id="photoResultContainer" class="min-h-[220px] p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl myanmar-text text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
-                        ဓာတ်ပုံရိုက်တင်ပြီး ဘာသာပြန်စနစ်ကို အသုံးပြုနိုင်ပါသည်...
+                    <div id="outputContainer" class="min-h-[300px] p-4 bg-slate-50 dark:bg-slate-900 rounded-xl myanmar-text text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-100 whitespace-pre-wrap">
+                        စာသားများကို ဘာသာပြန်ရန် Translate to Burmese ခလုတ်ကို နှိပ်ပါ...
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- TAB 3: PHRASEBOOK -->
-        <section id="view-phrasebook" class="hidden space-y-6">
-            <div class="glass-card rounded-2xl p-6 space-y-6">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-volume-high text-emerald-500"></i> Thai Essential Phrases for Travelers
-                    </h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 myanmar-text">
-                        ထိုင်းစကားပြော လမ်းညွှန် နှင့် အသံနားထောင်စနစ်
-                    </p>
+        <!-- PHOTO TRANSLATE -->
+        <section id="view-photo" class="hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                <div class="glass-card rounded-2xl p-5 space-y-4">
+                    <label class="font-semibold text-slate-800 dark:text-slate-200">Select Photo (ဓာတ်ပုံရွေးရန်)</label>
+                    <input type="file" id="photoInput" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-emerald-50 file:text-emerald-700 cursor-pointer" onchange="handleFileSelect(event)">
+                    <div id="previewBox" class="min-h-[200px] rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center p-2">
+                        <img id="photoPreview" class="max-h-[260px] rounded-lg hidden" alt="Preview">
+                        <span id="previewPlaceholder" class="text-xs text-slate-400">No image selected</span>
+                    </div>
+                    <button onclick="processPhotoTranslation()" class="w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-sm hover:bg-emerald-700 shadow-md">
+                        Translate Photo to Burmese
+                    </button>
                 </div>
 
+                <div class="glass-card rounded-2xl p-5 space-y-4">
+                    <label class="font-semibold text-slate-800 dark:text-slate-200">Photo Result</label>
+                    <div id="photoResultContainer" class="min-h-[200px] p-4 bg-slate-50 dark:bg-slate-900 rounded-xl myanmar-text text-sm whitespace-pre-wrap">
+                        Upload a photo of Thai menus or signs to translate.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHRASEBOOK -->
+        <section id="view-phrasebook" class="hidden space-y-4">
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200">Thai Speaking Guide</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 bg-white dark:bg-slate-800/60">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-base text-emerald-600 dark:text-emerald-400 thai-text">สวัสดีครับ / ค่ะ</span>
-                            <button onclick="speakThai('สวัสดีครับ')" class="p-2 text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    <div class="p-3 border rounded-xl flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-emerald-600 thai-text">สวัสดีครับ / ค่ะ</p>
+                            <p class="text-xs text-slate-400">Sawatdee krub / ka</p>
+                            <p class="text-sm myanmar-text">မင်္ဂလာပါ</p>
                         </div>
-                        <p class="text-xs text-slate-400">Sawatdee krub / ka</p>
-                        <p class="text-sm myanmar-text font-semibold text-slate-800 dark:text-slate-200">ဆဝတ်ဒီ ခရပ်/ခါ (မင်္ဂလာပါ)</p>
+                        <button onclick="speakThai('สวัสดีครับ')" class="p-2 text-slate-500 hover:text-emerald-600"><i class="fa-solid fa-volume-high"></i></button>
                     </div>
-
-                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 bg-white dark:bg-slate-800/60">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-base text-emerald-600 dark:text-emerald-400 thai-text">ขอบคุณครับ / ค่ะ</span>
-                            <button onclick="speakThai('ขอบคุณครับ')" class="p-2 text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fa-solid fa-volume-high"></i></button>
+                    <div class="p-3 border rounded-xl flex justify-between items-center">
+                        <div>
+                            <p class="font-bold text-emerald-600 thai-text">ขอบคุณครับ / ค่ะ</p>
+                            <p class="text-xs text-slate-400">Khop khun krub / ka</p>
+                            <p class="text-sm myanmar-text">ကျေးဇူးတင်ပါတယ်</p>
                         </div>
-                        <p class="text-xs text-slate-400">Khop khun krub / ka</p>
-                        <p class="text-sm myanmar-text font-semibold text-slate-800 dark:text-slate-200">ခော့ပ်ခွန် ခရပ်/ခါ (ကျေးဇူးတင်ပါတယ်)</p>
-                    </div>
-
-                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 bg-white dark:bg-slate-800/60">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-base text-emerald-600 dark:text-emerald-400 thai-text">เท่าไหร่ครับ?</span>
-                            <button onclick="speakThai('เท่าไหร่ครับ')" class="p-2 text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                        <p class="text-xs text-slate-400">Tao rai krub?</p>
-                        <p class="text-sm myanmar-text font-semibold text-slate-800 dark:text-slate-200">တောင်ရိုင် ခရပ်? (ဘယ်လောက်လဲ)</p>
-                    </div>
-
-                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 bg-white dark:bg-slate-800/60">
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-base text-emerald-600 dark:text-emerald-400 thai-text">ลดหน่อยได้ไหมครับ?</span>
-                            <button onclick="speakThai('ลดหน่อยได้ไหมครับ')" class="p-2 text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 transition"><i class="fa-solid fa-volume-high"></i></button>
-                        </div>
-                        <p class="text-xs text-slate-400">Lot noi dai mai krub?</p>
-                        <p class="text-sm myanmar-text font-semibold text-slate-800 dark:text-slate-200">လော့တ်နွိုင်ဒိုင်မိုင် ခရပ်? (ဈေးလျှော့ပေးလို့ရမလား)</p>
+                        <button onclick="speakThai('ขอบคุณครับ')" class="p-2 text-slate-500 hover:text-emerald-600"><i class="fa-solid fa-volume-high"></i></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TAB 4: CURRENCY CONVERTER -->
-        <section id="view-converter" class="hidden space-y-6">
-            <div class="max-w-xl mx-auto glass-card rounded-2xl p-6 space-y-6">
-                <div class="text-center space-y-1 border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">THB ↔ MMK Calculator</h2>
-                    <p class="text-xs text-slate-500 myanmar-text">ထိုင်းဘတ် နှင့် မြန်မာကျပ် ငွေလဲလှယ်နှုန်း တွက်ချက်စက်</p>
-                </div>
-
-                <div class="space-y-4">
+        <!-- CONVERTER -->
+        <section id="view-converter" class="hidden space-y-4">
+            <div class="glass-card rounded-2xl p-6 max-w-xl mx-auto space-y-4">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 text-center">THB ↔ MMK Converter</h2>
+                <div class="space-y-3">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Thai Baht (THB ฿)</label>
-                        <input type="number" id="thbInput" value="1000" oninput="convertFromTHB()" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 font-bold text-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <label class="text-xs font-semibold text-slate-500">Thai Baht (THB ฿)</label>
+                        <input type="number" id="thbInput" value="1000" oninput="convertFromTHB()" class="w-full p-3 rounded-xl border bg-white dark:bg-slate-900 font-bold text-lg">
                     </div>
+                    <div>
+                        <label class="text-xs font-semibold text-slate-500">Myanmar Kyat (MMK Ks)</label>
+                        <input type="number" id="mmkInput" value="125000" oninput="convertFromMMK()" class="w-full p-3 rounded-xl border bg-white dark:bg-slate-900 font-bold text-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <div class="text-center text-slate-400"><i class="fa-solid fa-arrow-down-up-lock text-sm"></i></div>
+    </main>
+
+    <script>
+        let selectedBase64 = null;
+
+        document.addEventListener('DOMContentLoaded', updateKeyStatusText);
+
+        function switchTab(tabName) {
+            document.querySelectorAll('section[id^="view-"]').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('bg-emerald-50', 'dark:bg-emerald-950/60', 'text-emerald-700', 'dark:text-emerald-400', 'font-semibold'));
+            document.getElementById(`view-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).classList.add('bg-emerald-50', 'dark:bg-emerald-950/60', 'text-emerald-700', 'dark:text-emerald-400', 'font-semibold'); }  function toggleTheme() { document.documentElement.classList.toggle('dark'); }  function manageApiKey() { const current = localStorage.getItem('gemini_api_key') \vert{}\vert{} ''; const key = prompt("Enter your free Google Gemini API Key:\n(Get one at https://aistudio.google.com/)", current); if (key !== null) { if (key.trim() === '') localStorage.removeItem('gemini_api_key'); else localStorage.setItem('gemini_api_key', key.trim()); updateKeyStatusText(); } }  function updateKeyStatusText() { const key = localStorage.getItem('gemini_api_key'); const btn = document.getElementById('keyStatusText'); if (btn) btn.innerText = key ? "API Key Active" : "Set API Key"; }  function getOrPromptApiKey() { let key = localStorage.getItem('gemini_api_key'); if (!key) { key = prompt("Please enter your free Google Gemini API Key:\n(Get one free at https://aistudio.google.com/)"); if (key) { localStorage.setItem('gemini_api_key', key.trim()); updateKeyStatusText(); } } return key; }  // ================= REAL AI TRANSLATION (GEMINI-3.8-FLASH) =================  async function runTranslation() { const text = document.getElementById('thaiInput').value.trim(); if (!text) return alert("Please enter Thai text first.");  const apiKey = getOrPromptApiKey(); if (!apiKey) return;  const loading = document.getElementById('loadingState'); const output = document.getElementById('outputContainer'); loading.classList.remove('hidden'); output.innerText = '';  try { const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `Translate the following Thai travel text completely into natural Burmese script. Translate all Thai sentences, place names, and times into clear Burmese script:\n\n${text}`
+                            }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error.message);
+                output.innerText = data.candidates[0].content.parts[0].text;
+            } catch (err) {
+                output.innerHTML = `<span class="text-red-500 font-semibold">Error: ${err.message}</span>`;
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                selectedBase64 = evt.target.result;
+                const p = document.getElementById('photoPreview');
+                p.src = selectedBase64;
+                p.classList.remove('hidden');
+                document.getElementById('previewPlaceholder').classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function processPhotoTranslation() {
+            if (!selectedBase64) return alert("Please select a photo first.");
+            const apiKey = getOrPromptApiKey();
+            if (!apiKey) return;
+
+            const res = document.getElementById('photoResultContainer');
+            res.innerText = 'AI reading photo & translating to Burmese...';
+
+            try {
+                const base64Data = selectedBase64.includes(',') ? selectedBase64.split(',')[1] : selectedBase64;
+                const mimeType = selectedBase64.includes(';') ? selectedBase64.split(';')[0].replace('data:', '') : 'image/jpeg';
+
+                const response = await fetch(`
